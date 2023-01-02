@@ -90,11 +90,11 @@
     </div>
 @endsection
 
-@section('js')
+@push('js')
     <script>
         $('#submit-create-role').click(function(e) {
             e.preventDefault();
             $('#form-create-role').submit();
         });
     </script>
-@endsection
+@endpush

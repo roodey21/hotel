@@ -72,11 +72,11 @@
     </div>
 @endsection
 
-@section('js')
+@push('js')
     <script>
         $('#submit-create-permission').on('click', function(e) {
             e.preventDefault();
             $('#form-create-permission').submit();
         })
     </script>
-@endsection
+@endpush

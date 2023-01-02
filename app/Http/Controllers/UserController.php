@@ -20,6 +20,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
+        $this->authorize('show user');
         $users = User::with('roles')->latest()->paginate(5);
         $roles = Role::orderBy('id', 'DESC')->get();
         if ($request->ajax()) {
