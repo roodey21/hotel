@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePriceTypeTable extends Migration
+class AddStatusColumnToFacilitiesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreatePriceTypeTable extends Migration
      */
     public function up()
     {
-        Schema::create('price_types', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
+        Schema::table('facilities', function (Blueprint $table) {
+            //
+            $table->enum('status', ['active', 'inactive'])->default('active')->after('name');
         });
     }
 
@@ -26,6 +26,9 @@ class CreatePriceTypeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('price_types');
+        Schema::table('facilities', function (Blueprint $table) {
+            //
+            $table->dropColumn('status');
+        });
     }
 }
