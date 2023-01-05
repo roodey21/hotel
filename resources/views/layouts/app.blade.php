@@ -21,7 +21,9 @@
     <link href="{{ asset('css/tabler-payments.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('css/tabler-vendors.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('css/demo.min.css') }}" rel="stylesheet" />
-    @yield('css')
+    <link rel="stylesheet" href="{{ asset('plugin/dropify/css/dropify.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('libs/sweetalert2/sweetalert2.min.css') }}">
+    @stack('css')
 </head>
 
 <body>
@@ -39,7 +41,10 @@
     <!-- Tabler Core -->
     <script src="{{ asset('js/tabler.min.js') }}"></script>
     <script src="{{ asset('js/demo.min.js') }}"></script>
-    @yield('js')
+    <script src="{{ asset('plugin/dropify/js/dropify.min.js') }}"></script>
+    <script src="{{ asset('plugin/dropify/js/upload-init.js') }}"></script>
+    <script src="{{ asset('libs/sweetalert2/sweetalert2.min.js') }}"></script>
+    @stack('js')
 </body>
 
 </html>

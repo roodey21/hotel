@@ -231,12 +231,8 @@
     <!-- modal delete confirmation end -->
 @endsection
 
-@section('css')
-    <link rel="stylesheet" href="{{ asset('libs/sweetalert2/sweetalert2.min.css') }}">
-@endsection
 
-@section('js')
-    <script src="{{ asset('libs/sweetalert2/sweetalert2.min.js') }}"></script>
+@push('js')
     <script src="{{ asset('js/function/createUser.js') }}"></script>
     <script src="{{ asset('js/function/deleteUser.js') }}"></script>
     <script src="{{ asset('js/function/editUser.js') }}"></script>
@@ -289,4 +285,4 @@
             });
         });
     </script>
-@endsection
+@endpush
