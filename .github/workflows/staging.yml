@@ -2,10 +2,10 @@ on:
   push:
     branches:
       - staging
-name: 🚀 Deploy website on push
+name: 🚀 Staging website on push
 jobs:
   web-deploy:
-    name: 🎉 Deploy
+    name: 🎉 Staging
     runs-on: ubuntu-latest
     steps:
       - name: 🚚 Get latest code
@@ -17,4 +17,4 @@ jobs:
           server: ftp.lpphotelyogya.com
           username: ${{ secrets.ftp_username }}
           password: ${{ secrets.ftp_password }}
-          server-dir: /public_html/lpphotelyogya.online/staging
+          server-dir: /public_html/lpphotelyogya.online/staging/
