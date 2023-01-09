@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\FacilityController;
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\PermissionsController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RolesController;
+use App\Http\Controllers\RoomController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('pages.homepage');
 });
 
 Route::get('/dashboard', function () {
@@ -28,16 +31,20 @@ Route::get('/dashboard', function () {
 /**
  * User Management Routes
  */
-Route::group(['middleware' => ['auth', 'role:super admin']], function () {
-    Route::group(['prefix' => 'users'], function () {
-        Route::get('/', [UserController::class, 'index'])->name('users.index');
-        Route::get('/getUsers', [UserController::class, 'getUsers']);
-        Route::get('/create', [UserController::class, 'create'])->name('users.create');
-        Route::post('/create', [UserController::class, 'store'])->name('users.store');
-        Route::get('/{user}/show', [UserController::class, 'show'])->name('users.show');
-        Route::get('/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
-        Route::patch('/{user}/update', [UserController::class, 'update'])->name('users.update');
-        Route::delete('/{user}/delete', [UserController::class, 'destroy'])->name('users.destroy');
+Route::group(['middleware' => 'auth'], function () {
+    Route::group(['middleware' => 'role:admin'], function () {
+        Route::group(['prefix' => 'users'], function () {
+            Route::get('/', [UserController::class, 'index'])->name('users.index');
+            Route::get('/getUsers', [UserController::class, 'getUsers']);
+            Route::get('/create', [UserController::class, 'create'])->name('users.create');
+            Route::post('/create', [UserController::class, 'store'])->name('users.store');
+            Route::get('/{user}/show', [UserController::class, 'show'])->name('users.show');
+            Route::get('/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+            Route::patch('/{user}/update', [UserController::class, 'update'])->name('users.update');
+            Route::delete('/{user}/delete', [UserController::class, 'destroy'])->name('users.destroy');
+        });
+        Route::resource('roles', RolesController::class);
+        Route::resource('permissions', PermissionsController::class);
     });
     /**
      * Post Routes
@@ -52,7 +59,12 @@ Route::group(['middleware' => ['auth', 'role:super admin']], function () {
         Route::delete('/{post}/delete', [PostController::class, 'destroy'])->name('posts.destroy');
     });
 
-    Route::resource('roles', RolesController::class);
-    Route::resource('permissions', PermissionsController::class);
+
+    Route::group(['prefix' => 'rooms', 'as' => 'rooms.'], function () {
+        Route::resource('/', RoomController::class);
+        Route::resource('facilities', FacilityController::class);
+    });
+
+    Route::resource('images', ImageController::class);
 });
 require __DIR__ . '/auth.php';

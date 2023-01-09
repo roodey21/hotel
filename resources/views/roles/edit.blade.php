@@ -23,7 +23,7 @@
                             <form action="{{ route('roles.update', $role->id) }}" method="POST" id="form-edit-role">
                                 @method('PATCH')
                                 @csrf
-                                <div class="form-group">
+                                <div class="form-group mb-2">
                                     <label for="name">Name</label>
                                     <input type="text" class="form-control" name="name" value="{{ $role->name }}">
                                 </div>
@@ -34,7 +34,6 @@
                                             <th scope="col" width="1%"><input type="checkbox" name="all_permission">
                                             </th>
                                             <th scope="col" width="20%">Name</th>
-                                            <th scope="col" width="1%">Guard</th>
                                         </thead>
 
                                         @foreach ($permissions as $permission)
@@ -45,7 +44,6 @@
                                                         {{ in_array($permission->name, $rolePermissions) ? 'checked' : '' }}>
                                                 </td>
                                                 <td>{{ $permission->name }}</td>
-                                                <td>{{ $permission->guard_name }}</td>
                                             </tr>
                                         @endforeach
                                     </table>
@@ -62,7 +60,7 @@
     </div>
 @endsection
 
-@section('js')
+@push('js')
     <script>
         $('#submit-edit-role').click(function(e) {
             e.preventDefault();
@@ -84,4 +82,4 @@
             });
         });
     </script>
-@endsection
+@endpush

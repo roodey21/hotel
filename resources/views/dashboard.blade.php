@@ -2,8 +2,16 @@
 
 @section('title', 'Dashboard Admin LPP Hotel')
 
+<!--
+    hal apa saja yang akan kita tampilkan di halaman dashboard:
+    1. card untuk menampilkan jumlah kamar yang tersedia
+    2. card untuk menampilkan jumlah kamar yang dibooking
+    3. jumlah kamar yang tersedia (total kamar)
+    4. jumlah pengunjung yang mengakses halaman
+    5. 
+-->
 @section('content')
-    <div class="container-fluid">
+    <div class="container-xl">
         <!-- Page title -->
         <div class="page-header d-print-none">
             <div class="row align-items-center">
@@ -53,7 +61,7 @@
         </div>
     </div>
     <div class="page-body">
-        <div class="container-fluid">
+        <div class="container-xl">
             <div class="row row-deck row-cards">
                 <div class="col-sm-6 col-lg-3">
                     <div class="card">
